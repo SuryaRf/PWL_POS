@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LevelController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
@@ -7,7 +8,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SalesController;
 
-Route::get('/', [HomeController::class, 'index']);
+// Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function (){
+    return view('welcome');
+});
+Route::get('/level', [LevelController::class, 'index']);
 
 Route::prefix('category')->group(function () {
     Route::get('/food-beverage', [ProductController::class, 'foodBeverage']);
