@@ -8,13 +8,62 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-
-    public function index()
+      public function index()
     {
-        $userCount = UserModel::where('level_id', 2)->count();
-        return view('user', ['userCount' => $userCount]);
+        $user = UserModel::firstOrNew(
+            [
+                'username' => 'manager33',
+                'name' => 'Manager Tiga Tiga',
+                'password' => Hash::make('12345'),
+                'level_id' => 2
+            ],
+        );
+
+        $user->save();
+        return view('user', ['data' => $user]);
     }
-    
+// class UserController extends Controller
+// {
+//       public function index()
+//     {
+//         $user = UserModel::firstOrNew(
+//             [
+//                 'username' => 'manager',
+//                 'name' => 'Manager',
+//             ],
+//         );
+//         return view('user', ['data' => $user]);
+//     }
+    // public function index()
+    // {
+    //     $user = UserModel::firstOrCreate(
+    //         [
+    //             'username' => 'manager22',
+    //             'name' => 'Manager Dua Dua',
+    //             'password' => Hash::make('12345'),
+    //             'level_id' => 2
+    //         ],
+    //     );
+    //     return view('user', ['data' => $user]);
+    // }
+    // public function index()
+    // {
+    //     $user = UserModel::firstOrCreate(
+    //         [
+    //             'username' => 'manager',
+    //             'name' => 'Manager',
+
+    //         ],
+    //     );
+    //     return view('user', ['data' => $user]);
+    // }
+
+    // public function index()
+    // {
+    //     $userCount = UserModel::where('level_id', 2)->count();
+    //     return view('user', ['userCount' => $userCount]);
+    // }
+
     // public function index()
     // {
 
