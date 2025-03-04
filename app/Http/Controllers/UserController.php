@@ -10,18 +10,63 @@ class UserController extends Controller
 {
       public function index()
     {
-        $user = UserModel::firstOrNew(
-            [
-                'username' => 'manager33',
-                'name' => 'Manager Tiga Tiga',
-                'password' => Hash::make('12345'),
-                'level_id' => 2
-            ],
-        );
-
-        $user->save();
-        return view('user', ['data' => $user]);
+        $user = UserModel :: create([
+            'username' => 'manager11',
+            'name' => 'Manager11',
+            'password' => Hash :: make('12345'),
+            'level_id' => 2,
+            
+            ]);
+            
+            $user->username = 'manager12';
+            
+            $user->save();
+            
+            $user->wasChanged(); // true
+            $user->wasChanged('username'); // true
+            $user->wasChanged(['username', 'level_id']); // true
+            $user->wasChanged('name'); // false
+            dd($user->wasChanged(['name', 'username'])); // true
     }
+// class UserController extends Controller
+// {
+//       public function index()
+//     {
+//         $user = UserModel :: create([
+//             'username' => 'manager55',
+//             'name' => 'Manager55',
+//             'password' => Hash::make('12345'),
+//             'level_id' => 2,  
+//             ]);
+//             $user->username = 'manager56';           
+//             $user->isDirty(); // true
+//             $user->isDirty('username'); // true
+//             $user->isDirty('name'); // false
+//             $user->isDirty(['name', 'username']); // true        
+//             $user->isClean(); // false
+//             $user->isClean('username'); // false
+//             $user->isClean('name'); // true
+//             $user->isClean(['name', 'username']); // false
+//             $user->save();       
+//             $user->isDirty(); // false
+//             $user->isClean(); // true
+//             dd($user->isDirty());
+//     }
+// class UserController extends Controller
+// {
+//       public function index()
+//     {
+//         $user = UserModel::firstOrNew(
+//             [
+//                 'username' => 'manager33',
+//                 'name' => 'Manager Tiga Tiga',
+//                 'password' => Hash::make('12345'),
+//                 'level_id' => 2
+//             ],
+//         );
+//         $user->save();
+//         return view('user', ['data' => $user]);
+//     }
 // class UserController extends Controller
 // {
 //       public function index()
