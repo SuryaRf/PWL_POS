@@ -26,7 +26,7 @@ class UserController extends Controller
     }
     public function index()
     {
-        $user = Usermodel::all(); // true
+        $user = Usermodel::with('level')->get(); 
         return view('user', ['data' => $user]);
     }
     public function tambah_simpan(Request $request)
