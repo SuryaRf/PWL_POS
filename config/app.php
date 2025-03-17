@@ -2,6 +2,8 @@
 
 return [
 
+    'memory_limit' => env('PHP_MEMORY_LIMIT', '1024M'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Name
