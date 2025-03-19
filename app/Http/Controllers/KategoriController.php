@@ -4,31 +4,34 @@ namespace App\Http\Controllers;
 
 use App\DataTables\KategoriDataTable;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use App\Models\KategoriModel;
 
+
 class KategoriController extends Controller
 {
-    public function index(KategoriDataTable $dataTable)
-    {
-        return $dataTable->render('kategori.index');
-    }
 
     public function create()
     {
         return view('kategori.create');
     }
 
-    public function store(Request $request)
-    {
-        KategoriModel::create([
-            'kategori_kode' => $request->kodeKategori,
-            'kategori_nama' => $request->namaKategori,
-        ]);
 
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'kategori_kode' => 'bail|required|unique:m_kategori,kategori_kode|max:20',
+            'kategori_nama' => 'bail|required|max:100',
+
+        ]);
+        // The post is valid ...
         return redirect('/kategori');
     }
-
+    public function index(KategoriDataTable $dataTable)
+    {
+        return $dataTable->render('kategori.index');
+    }
     public function edit($id)
     {
         $kategori = KategoriModel::findOrFail($id);
@@ -47,12 +50,12 @@ class KategoriController extends Controller
     }
 
     public function destroy($id)
-{
-    $kategori = KategoriModel::findOrFail($id);
-    $kategori->delete();
+    {
+        $kategori = KategoriModel::findOrFail($id);
+        $kategori->delete();
 
-    return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus');
-}
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus');
+    }
 
 
     // $data = [
