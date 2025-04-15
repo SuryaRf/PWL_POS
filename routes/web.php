@@ -14,7 +14,7 @@ Route::pattern('id', '[0-9]+'); // artinya ketika ada parameter {id}, maka harus
 
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'postlogin']);
-Route::get('logout', [AuthController::class, 'logout'])->middleware('auth');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::middleware(['auth'])->group(function () { // artinya semua route di dalam group ini harus login dulu
     // masukkan semua route yang perlu autentikasi di sini
@@ -47,6 +47,24 @@ Route::get('/user/ubah/{id}', [UserController::class, 'ubah']);
 Route::get('/user/hapus/{id}', [UserController::class, 'hapus']);
 
 Route::get('/user/ubah_simpan/{id}', [UserController::class, 'ubah_simpan']);
+
+Route::middleware(['auth'])->group(function () { // artinya semua route di dalam group ini harus login dulu
+    Route::get('/', [WelcomeController::class, 'index']);
+    // route Level
+
+    // artinya semua route di dalam group ini harus punya role ADM (Administrator)
+    Route::middleware(['authorize:ADM'])->group(function () {
+        Route::get('/level', [LevelController::class, 'index']);
+        Route::post('/level/list', [LevelController::class, 'list']); // untuk untuk list json datatables
+        Route::get('/level/create', [LevelController::class, 'create']);
+        Route::post('/level/store', [LevelController::class, 'store']);
+        Route::get('/level/{id}/edit', [LevelController::class, 'edit']); // untuk tampilkan form edit
+        Route::put('/level/{id}', [LevelController::class, 'update']); // untuk proses update data
+        Route::delete('/level/{id}', [LevelController::class, 'destroy']); // untuk proses hapus data
+    });
+
+    // route Kategori
+});
 // Route::get('/user/{id}/name/{name}', [UserController::class, 'show']);
 // Route::get('/sales', [SalesController::class, 'index']);
 // Route::prefix('category')->group(function () {
