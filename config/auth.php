@@ -11,7 +11,7 @@ return [
     | reset "broker" for your application. You may change these values
     | as required, but they're a perfect start for most applications.
     |
-    */
+    */      
 
     'defaults' => [
         'guard' => env('AUTH_GUARD', 'web'),
@@ -59,17 +59,17 @@ return [
     |
     */
 
-    'providers' => [
-        'users' => [
-            'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
-        ],
+        'providers' => [
+            'users' => [
+                'driver' => 'eloquent',
+                'model' => env('AUTH_MODEL', App\Models\UserModel::class),
+            ],
 
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
-    ],
+            // 'users' => [
+            //     'driver' => 'database',
+            //     'table' => 'users',
+            // ],
+        ],
 
     /*
     |--------------------------------------------------------------------------

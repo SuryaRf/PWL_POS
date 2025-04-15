@@ -343,6 +343,13 @@ return [
             'url'  => 'kategori', 
             'icon' => 'fas fa-list', 
         ],
+        [
+            'text' => 'Logout',
+            'url'  => 'logout',
+            'icon' => 'fas fa-sign-out-alt',
+            'type' => 'logout',
+            'topnav_right' => true,
+        ],
         
         [
             'text' => 'multilevel',
@@ -398,6 +405,8 @@ return [
             'icon_color' => 'cyan',
             'url' => '#',
         ],
+
+        
     ],
 
     /*

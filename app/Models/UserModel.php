@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 
 class UserModel extends Model
@@ -20,6 +21,8 @@ class UserModel extends Model
      * @var array
      */
     protected $fillable = ['username', 'name', 'password', 'level_id'];
+    protected $hidden = ['password'];
+    protected $cast = ['password' => 'hashed'];
 
     public function level(): BelongsTo
 {
